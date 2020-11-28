@@ -1,0 +1,61 @@
+{
+  "name": "nasa_test",
+  "version": "0.0.1",
+  "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./src/*.{js,jsx,ts,tsx}": [
+      "npx prettier --write",
+      "eslint --ext .tsx,.ts src --fix"
+    ]
+  },
+  "scripts": {
+    "clean-ios": "cd ios/ && xcodebuild clean && rm -rf build/ && rm -rf Pods/ && rm Podfile.lock && cd ../",
+    "clean-android": "cd android && ./gradlew cleanBuildCache && ./gradlew clean && rm -rf android/build && cd ../",
+    "clean-project": "yarn clean && yarn clean-ios && yarn clean-android && rm -rf node_modules package-lock.json *.lock",
+    "clean": "rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && watchman watch-del-all",
+    "android": "cd android/ && ./gradlew :app:dependencies && cd ../ && react-native run-android --no-jetifier --verbose",
+    "ios": "cd ios/ && pod install && pod update && cd ../ && react-native run-ios --verbose",
+    "web": "react-scripts start",
+    "start": "yarn clean && react-native start --reset-cache --verbose",
+    "both": "yarn ios && yarn android",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest -- --watch",
+    "lint": "eslint --ext .tsx,.ts src --fix"
+  },
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^5.11.2",
+    "@react-navigation/native": "^5.8.10",
+    "@react-navigation/stack": "^5.12.8",
+    "react": "^17.0.1",
+    "react-native": "^0.63.3",
+    "react-native-dynamic-vector-icons": "^1.1.4",
+    "react-native-gesture-handler": "^1.9.0",
+    "react-native-safe-area-context": "^3.1.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-react": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
+    "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "@types/react": "^17.0.0",
+    "babel-jest": "^25.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-transform-typescript-metadata": "^0.3.1",
+    "eslint": "^6.5.1",
+    "husky": "^4.3.0",
+    "jest": "^25.1.0",
+    "lint-staged": "^10.5.2",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-test-renderer": "16.13.1",
+    "typescript": "^4.1.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "presets": [
+    "module:metro-react-native-babel-preset",
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": [
+          {"@assets": "./src/assets/"},
+          {"@utils": "./src/utils/"},
+          {"@screens": "./src/screens"},
+          {"@navigation": "./src/navigation"},
+          {"@components": "./src/components/"}
+        ],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "babel-plugin-transform-typescript-metadata"
+    ]
+  ],
+  "env": {
+    "production": {
+      "presets": ["minify"]
+    }
+  }
+}
