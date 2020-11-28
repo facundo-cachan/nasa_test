@@ -1,6 +1,21 @@
 import {width, height} from '@utils/_dimensions';
 
 export default {
+  container: {
+    flex: 1,
+    width,
+    height: height / 3,
+    flexDirection: 'column',
+    marginTop: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#424242',
+  },
+  scrollView: {
+    width,
+    height: height + width,
+    backgroundColor: '#4646',
+  },
   screenTitle: {
     width,
     height: 70,
@@ -15,5 +30,10 @@ export default {
     margin: 5,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  imgBackground: {
+    flex: 1,
+    width,
+    height: width,
   },
 };
