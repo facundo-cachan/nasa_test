@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View, ImageBackground} from 'react-native';
+import {View, Image, ImageBackground} from 'react-native';
 import Icon from 'react-native-dynamic-vector-icons';
 import {AppContext} from './AppProvider';
 
@@ -15,7 +15,7 @@ const Stack = createStackNavigator(),
         headerTitle: () => (
           <View style={styles.screenTitle}>
             <ImageBackground
-              source={require('@assets/images/logo.png')}
+              source={require('../assets/images/logo.png')}
               style={styles.screenTitleImg}
             />
           </View>
@@ -54,7 +54,14 @@ const Stack = createStackNavigator(),
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={screenOptions}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={styles.headerLogo}
+                source={require('@assets/images/logo.png')}
+              />
+            ),
+          }}
         />
       </Stack.Navigator>
     );
