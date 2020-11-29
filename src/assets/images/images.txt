@@ -1,0 +1,4 @@
+https://raw.githubusercontent.com/instamobile/tinder-react-native/master/assets/1.jpg
+https://raw.githubusercontent.com/instamobile/tinder-react-native/master/assets/2.jpg
+https://raw.githubusercontent.com/instamobile/tinder-react-native/master/assets/3.jpg
+https://raw.githubusercontent.com/instamobile/tinder-react-native/master/assets/4.jpg
