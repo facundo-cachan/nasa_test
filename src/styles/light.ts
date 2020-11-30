@@ -28,13 +28,9 @@ export default {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  imgBackground: {
+  img: {
     width,
     height: width,
-  },
-  rover: {
-    width,
-    height: width / 2,
     resizeMode: 'stretch',
   },
   buttonContainer: {

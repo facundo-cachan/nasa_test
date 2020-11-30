@@ -6,12 +6,16 @@ const app = express(),
 
 app
   .get('/', (_: any, res: Response) => res.send('Express + TypeScript Server'))
-  .get('/:data', (req: Request, res: Response) => {
-    const param = req.params.data,
-      data = require(`./data/${param}.json`);
-    res.status(200).json(data);
+  .get('/:rover/:camera', (req: Request, res: Response) => {
+    const {rover, camera} = req.params;
+    const rovers = require(`./data/${rover}.json`);
+    res.status(200).json(rovers);
   })
   .listen(PORT, () => {
     console.clear();
     console.log(`⚡️ Server is running at http://localhost:${PORT}`);
   });
+
+/**
+ * https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=10&camera=rhaz&api_key=DEMO_KEY
+ */
