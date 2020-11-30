@@ -1,7 +1,7 @@
 import React from 'react';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import {width} from '@utils/_dimensions';
-const MyCalendar = () => (
+const MyCalendar = (props: any) => (
   <CalendarList
     // Initially visible month. Default = Date()
     current={Date()}
@@ -12,9 +12,12 @@ const MyCalendar = () => (
     // Set custom calendarWidth.
     calendarWidth={width}
     // Handler which gets executed on day press. Default = undefined
+    /*
     onDayPress={(day: any) => {
       console.log('selected day', day);
     }}
+    */
+    {...props}
   />
 );
 

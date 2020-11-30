@@ -5,7 +5,7 @@ import {
   ScrollView,
   View,
   Image,
-  TextInput,
+  FlatList,
 } from 'react-native';
 
 import {Loading, MyCalendar} from '@components';
@@ -20,7 +20,7 @@ const PhotosScreen = ({
 }: any) => {
   const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
-    [value, onChangeText] = React.useState('Useless Placeholder'),
+    [value, onChangeText] = React.useState('2004-01-14'),
     [photos, setPhotos] = React.useState(true);
 
   React.useEffect(() => {
@@ -43,12 +43,21 @@ const PhotosScreen = ({
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="PhotosScreen">
-      <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(text: string) => onChangeText(text)}
-        value={value}
+      <MyCalendar
+        onDayPress={(day: any) => {
+          onChangeText(day.dateString);
+        }}
       />
-      <MyCalendar />
+      <FlatList
+        data={photos.filter((photo: Photo) => photo.earth_date === value)}
+        renderItem={({item}: any) => (
+          <View style={[styles.viewCentered, {backgroundColor: '#A9F5A9'}]}>
+            <Text>{JSON.stringify(item)}</Text>
+          </View>
+        )}
+        keyExtractor={(item: any) => item.id}
+      />
+      {/*
       <ScrollView style={styles.scrollView}>
         {photos && photos.length >= 1 ? (
           photos.map(({id, img_src}: Photo) => (
@@ -60,7 +69,8 @@ const PhotosScreen = ({
         ) : (
           <Text style={styles.screenTitle}>Photos not found</Text>
         )}
-      </ScrollView>
+        </ScrollView>
+        */}
     </SafeAreaView>
   );
 };
