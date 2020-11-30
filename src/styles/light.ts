@@ -17,8 +17,7 @@ export default {
   screenTitle: {
     width,
     fontSize: 22,
-    alignItems: 'center',
-    justifyItems: 'center',
+    textAlign: 'center',
     backgroundColor: '#4646',
   },
   headerLogo: {width: 50, height: 50},

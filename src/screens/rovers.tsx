@@ -1,6 +1,6 @@
 import React from 'react';
-import {SafeAreaView, TouchableHighlight, Text} from 'react-native';
-import {Loading} from '@components';
+import {SafeAreaView, Text} from 'react-native';
+import {Loading, Btn} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
 type Rover = {
@@ -8,14 +8,25 @@ type Rover = {
   img: string;
   cameras: string[];
 };
+const roversJSON = require('../mocks/rover.json');
 
-const Rovers = require('../mocks/rover.json');
+const RoversScreen = ({route: {params}, navigation}: any) => {
+  console.log(params);
 
-const RoversScreen = ({navigation}: any) => {
   const {styles} = React.useContext(AppContext),
-    [loading, setLoading] = React.useState(true);
+    [loading, setLoading] = React.useState(true),
+    [rovers, setRovers] = React.useState([]);
 
   React.useEffect(() => {
+    if (params === undefined) {
+      setRovers(roversJSON);
+    } else {
+      console.log(
+        roversJSON.filter((rover: Rover) => {
+          if (rover.cameras.includes(params.id)) return rover.id;
+        }),
+      );
+    }
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -25,21 +36,22 @@ const RoversScreen = ({navigation}: any) => {
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="RoversScreen">
-      {Rovers.map(({id, cameras}: Rover) => (
-        <TouchableHighlight
+      <Text style={styles.screenTitle}>{rovers}</Text>
+      {/*
+      rovers.map(({cameras, id}: Rover) => (
+        <Btn
           key={id}
-          activeOpacity={0.6}
-          underlayColor="#DDDDDD"
-          style={styles.viewCentered}
           onPress={() => {
             navigation.navigate('Cameras', {
-              id,
               cameras,
+              rover: id.toLowerCase(),
             });
-          }}>
-          <Text style={styles.viewTxt}>{id}</Text>
-        </TouchableHighlight>
-      ))}
+          }}
+          label={id}
+          icon="car"
+        />
+      ))
+        */}
     </SafeAreaView>
   );
 };

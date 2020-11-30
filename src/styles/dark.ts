@@ -18,7 +18,6 @@ export default {
     width,
     fontSize: 22,
     alignItems: 'center',
-    justifyItems: 'center',
     backgroundColor: '#4646',
   },
   headerLogo: {width: 50, height: 50},

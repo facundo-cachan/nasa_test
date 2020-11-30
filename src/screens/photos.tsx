@@ -5,7 +5,7 @@ import {AppContext} from '@navigation/AppProvider';
 
 const PhotosScreen = ({
   route: {
-    params: {id, camera},
+    params: {camera, rover},
   },
 }: any) => {
   const {styles} = React.useContext(AppContext),
@@ -14,7 +14,7 @@ const PhotosScreen = ({
 
   React.useEffect(() => {
     fetch(
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/${id.toLowerCase()}/photos?sol=10&camera=${camera.toLowerCase()}&api_key=DEMO_KEY`,
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=10&camera=${camera.toLowerCase()}&api_key=DEMO_KEY`,
     )
       .then((response) => response.json())
       .then((json) => setPhotos(json.photos))
