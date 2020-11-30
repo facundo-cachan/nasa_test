@@ -5,7 +5,7 @@ import styleDark from '../styles/dark';
 export const AppContext: React.Context<any> = React.createContext(null);
 
 export const AppProvider = ({children}: any) => {
-  const [selectedStyles, setStyle] = React.useState(true);
+  const [selectedStyles, setStyle] = React.useState(false);
   return (
     <AppContext.Provider
       value={{

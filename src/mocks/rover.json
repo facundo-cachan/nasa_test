@@ -1,0 +1,17 @@
+[
+  {
+    "id": "Curiosity",
+    "img": null,
+    "cameras": ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM"]
+  },
+  {
+    "id": "Opportunity",
+    "img": null,
+    "cameras": ["FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES"]
+  },
+  {
+    "id": "Spirit",
+    "img": null,
+    "cameras": ["FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES"]
+  }
+]

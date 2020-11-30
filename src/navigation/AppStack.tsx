@@ -2,16 +2,16 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {View, ImageBackground} from 'react-native';
-import Icon from 'react-native-dynamic-vector-icons';
 import {AppContext} from './AppProvider';
 
 import HomeScreen from '@screens/home';
-
-const Rovers = ['Curiosity', 'Opportunity', 'Spirit'];
+import RoversScreen from '@screens/rovers';
+import CamerasScreen from '@screens/cameras';
+import PhotosScreen from '@screens/photos';
 
 const Stack = createStackNavigator(),
   Tab = createBottomTabNavigator(),
-  StackScreens = ({route: {name}}: any) => {
+  AppStack = () => {
     const {styles} = React.useContext(AppContext),
       screenOptions = {
         headerTitle: () => (
@@ -28,38 +28,26 @@ const Stack = createStackNavigator(),
     return (
       <Stack.Navigator>
         <Stack.Screen
-          name={name}
+          name="Home"
           component={HomeScreen}
           options={screenOptions}
         />
+        <Stack.Screen
+          name="Rovers"
+          component={RoversScreen}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="Cameras"
+          component={CamerasScreen}
+          options={screenOptions}
+        />
+        <Stack.Screen
+          name="Photos"
+          component={PhotosScreen}
+          options={screenOptions}
+        />
       </Stack.Navigator>
-    );
-  },
-  AppStack = () => {
-    return (
-      <Tab.Navigator
-        tabBarOptions={{
-          activeTintColor: '#2e64e5',
-        }}>
-        {Rovers.map((rover: string, k: any) => (
-          <Tab.Screen
-            key={k}
-            name={rover}
-            component={StackScreens}
-            options={{
-              tabBarLabel: rover,
-              tabBarIcon: ({color, size}: {color: string; size: number}) => (
-                <Icon
-                  type="MaterialCommunityIcons"
-                  name="home-outline"
-                  color={color}
-                  size={size}
-                />
-              ),
-            }}
-          />
-        ))}
-      </Tab.Navigator>
     );
   };
 
