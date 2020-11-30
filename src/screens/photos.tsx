@@ -3,6 +3,8 @@ import {Text, SafeAreaView} from 'react-native';
 import {Loading} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
+import type {Photo} from '../interfaces';
+
 const PhotosScreen = ({
   route: {
     params: {camera, rover},
@@ -14,7 +16,7 @@ const PhotosScreen = ({
 
   React.useEffect(() => {
     fetch(
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=10&camera=${camera.toLowerCase()}&api_key=DEMO_KEY`,
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover.toLowerCase()}/photos?sol=10&camera=${camera}&api_key=DEMO_KEY`,
     )
       .then((response) => response.json())
       .then((json) => setPhotos(json.photos))
@@ -30,8 +32,13 @@ const PhotosScreen = ({
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="PhotosScreen">
-      <Text style={styles.viewTxt}>PhotosScreen</Text>
-      <Text style={styles.viewTxt}>{JSON.stringify(photos)}</Text>
+      {photos && photos.length >= 1 ? (
+        photos.map(({id, camera}: Photo) => (
+          <Text key={id}>{JSON.stringify(camera)}</Text>
+        ))
+      ) : (
+        <Text style={styles.screenTitle}>Photos not found</Text>
+      )}
     </SafeAreaView>
   );
 };

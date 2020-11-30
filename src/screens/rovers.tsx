@@ -1,18 +1,13 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {Loading, Btn} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
-type Rover = {
-  id: string;
-  img: string;
-  cameras: string[];
-};
-const roversJSON = require('../mocks/rover.json');
+import type {Rover} from '../interfaces';
+
+import roversJSON from '../mocks/rover.json';
 
 const RoversScreen = ({route: {params}, navigation}: any) => {
-  console.log(params);
-
   const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
     [rovers, setRovers] = React.useState([]);
@@ -21,37 +16,48 @@ const RoversScreen = ({route: {params}, navigation}: any) => {
     if (params === undefined) {
       setRovers(roversJSON);
     } else {
-      console.log(
+      setRovers(
         roversJSON.filter((rover: Rover) => {
-          if (rover.cameras.includes(params.id)) return rover.id;
+          if (Object(rover.cameras).includes(params.id)) return rover.id;
         }),
       );
     }
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   return loading ? (
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="RoversScreen">
-      <Text style={styles.screenTitle}>{rovers}</Text>
-      {/*
-      rovers.map(({cameras, id}: Rover) => (
-        <Btn
-          key={id}
-          onPress={() => {
-            navigation.navigate('Cameras', {
-              cameras,
-              rover: id.toLowerCase(),
-            });
-          }}
-          label={id}
-          icon="car"
-        />
-      ))
-        */}
+      {params
+        ? rovers.map(({id}: Rover) => (
+            <Btn
+              key={id}
+              onPress={() => {
+                navigation.navigate('Photos', {
+                  rover: id,
+                  camera: params.id,
+                });
+              }}
+              label={id}
+              icon="car"
+            />
+          ))
+        : rovers.map(({id, cameras}: Rover) => (
+            <Btn
+              key={id}
+              onPress={() => {
+                navigation.navigate('Cameras', {
+                  id,
+                  cameras,
+                });
+              }}
+              label={id.toUpperCase()}
+              icon="car"
+            />
+          ))}
     </SafeAreaView>
   );
 };

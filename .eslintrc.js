@@ -1,7 +1,6 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
   },
   extends: [
     'eslint:recommended',
@@ -18,6 +17,12 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
+    'react/display-name': [
+      0,
+      {
+        'ignoreTranspilerName': true
+      }
+    ],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],

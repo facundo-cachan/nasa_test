@@ -78,7 +78,7 @@ const Stack = createStackNavigator(),
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}: {color: string; size: number}) => (
             <Icon
-              type="MaterialCommunityIcons"
+              type="Ionicons"
               name="home-outline"
               color={color}
               size={size}

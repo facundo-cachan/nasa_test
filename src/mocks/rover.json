@@ -1,17 +1,17 @@
 [
   {
-    "id": "Curiosity",
+    "id": "curiosity",
     "img": null,
-    "cameras": ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM"]
+    "cameras": ["fhaz", "rhaz", "mast", "chemcam", "mahli", "mardi", "navcam"]
   },
   {
-    "id": "Opportunity",
+    "id": "opportunity",
     "img": null,
-    "cameras": ["FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES"]
+    "cameras": ["fhaz", "rhaz", "navcam", "pancam", "minites"]
   },
   {
-    "id": "Spirit",
+    "id": "spirit",
     "img": null,
-    "cameras": ["FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES"]
+    "cameras": ["fhaz", "rhaz", "navcam", "pancam", "minites"]
   }
 ]

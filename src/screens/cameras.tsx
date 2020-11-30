@@ -1,23 +1,18 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {Loading, Btn} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
-type Camera = {
-  id: string;
-  name: string;
-};
+import type {Camera} from '../interfaces';
 
 const CamerasScreen = ({route: {params}, navigation}: any) => {
-  console.log(params);
-
   const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
     [cameras, setCameras] = React.useState([]);
 
   React.useEffect(() => {
     if (params === undefined) {
-      setCameras(require('../mocks/cameras.json'));
+      setCameras(import('../mocks/cameras.json'));
     } else {
       setCameras(params.cameras);
     }
@@ -30,38 +25,32 @@ const CamerasScreen = ({route: {params}, navigation}: any) => {
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="CamerasScreen">
-      {params && params.rover ? (
-        <>
-          <Text style={styles.screenTitle}>{params.rover}</Text>
-          {cameras.map((camera: string) => (
+      {params
+        ? cameras.map((camera: string) => (
             <Btn
               key={camera}
               onPress={() => {
                 navigation.navigate('Photos', {
+                  rover: params.id,
                   camera,
-                  rover: params.rover,
                 });
               }}
-              label={camera}
+              label={camera.toUpperCase()}
+              icon="camera"
+            />
+          ))
+        : cameras.map(({id, name}: Camera) => (
+            <Btn
+              key={id}
+              onPress={() => {
+                navigation.navigate('Rovers', {
+                  id,
+                });
+              }}
+              label={name.toUpperCase()}
               icon="camera"
             />
           ))}
-        </>
-      ) : (
-        cameras.map(({id, name}: Camera) => (
-          <Btn
-            key={id}
-            onPress={() => {
-              navigation.navigate('Rovers', {
-                id,
-                name,
-              });
-            }}
-            label={name}
-            icon="camera"
-          />
-        ))
-      )}
     </SafeAreaView>
   );
 };

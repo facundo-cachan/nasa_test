@@ -3,7 +3,7 @@ import {SafeAreaView, View, Text} from 'react-native';
 import {Loading} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
-const HomeScreen = ({navigation}: any) => {
+const HomeScreen = () => {
   const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true);
 
@@ -18,11 +18,7 @@ const HomeScreen = ({navigation}: any) => {
   ) : (
     <SafeAreaView style={styles.container} testID="HomeScreen">
       <View style={styles.viewCentered}>
-        <Text
-          style={styles.screenTitle}
-          onPress={navigation.navigate('Rovers')}>
-          HomeScreen
-        </Text>
+        <Text style={styles.screenTitle}>HomeScreen</Text>
       </View>
     </SafeAreaView>
   );
