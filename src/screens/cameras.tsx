@@ -12,7 +12,8 @@ const CamerasScreen = ({route: {params}, navigation}: any) => {
 
   React.useEffect(() => {
     if (params === undefined) {
-      setCameras(import('../mocks/cameras.json'));
+      const cameras = require('../mocks/cameras.json');
+      setCameras(cameras);
     } else {
       setCameras(params.cameras);
     }
