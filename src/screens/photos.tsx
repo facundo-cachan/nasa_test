@@ -1,6 +1,14 @@
 import React from 'react';
-import {Text, SafeAreaView, ScrollView, View, Image} from 'react-native';
-import {Loading} from '@components';
+import {
+  Text,
+  SafeAreaView,
+  ScrollView,
+  View,
+  Image,
+  TextInput,
+} from 'react-native';
+
+import {Loading, MyCalendar} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
 import type {Photo} from '../interfaces';
@@ -12,6 +20,7 @@ const PhotosScreen = ({
 }: any) => {
   const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
+    [value, onChangeText] = React.useState('Useless Placeholder'),
     [photos, setPhotos] = React.useState(true);
 
   React.useEffect(() => {
@@ -34,21 +43,18 @@ const PhotosScreen = ({
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="PhotosScreen">
-      {/*  
-      <Text>Photos: {photos.length}</Text>
-      <Text>{JSON.stringify(photos)}</Text>
-      */}
+      <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={(text: string) => onChangeText(text)}
+        value={value}
+      />
+      <MyCalendar />
       <ScrollView style={styles.scrollView}>
         {photos && photos.length >= 1 ? (
           photos.map(({id, img_src}: Photo) => (
             <View key={id} style={styles.viewCentered}>
               <Text style={styles.img}>{img_src}</Text>
-              <Image
-                style={styles.img}
-                source={{
-                  uri: img_src,
-                }}
-              />
+              <Image style={styles.img} source={{uri: img_src}} />
             </View>
           ))
         ) : (
