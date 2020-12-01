@@ -1,11 +1,12 @@
 import React from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
-import {Loading} from '@components';
+import {SafeAreaView, Text} from 'react-native';
+import {Loading, MyCalendar} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
 const HomeScreen = () => {
   const {styles} = React.useContext(AppContext),
-    [loading, setLoading] = React.useState(true);
+    [loading, setLoading] = React.useState(true),
+    [text, setText] = React.useState();
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -17,9 +18,12 @@ const HomeScreen = () => {
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="HomeScreen">
-      <View style={styles.viewCentered}>
-        <Text style={styles.screenTitle}>HomeScreen</Text>
-      </View>
+      <MyCalendar
+        onPress={(day: any) => {
+          setText(day.dateString);
+        }}
+      />
+      <Text>{text}</Text>
     </SafeAreaView>
   );
 };

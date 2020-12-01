@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  SafeAreaView,
-  ScrollView,
-  View,
-  Image,
-  FlatList,
-} from 'react-native';
+import {SafeAreaView, View, Image, Text, FlatList} from 'react-native';
 
 import {Loading, MyCalendar} from '@components';
 import {AppContext} from '@navigation/AppProvider';
@@ -18,10 +11,9 @@ const PhotosScreen = ({
     params: {camera, rover},
   },
 }: any) => {
-  const {styles} = React.useContext(AppContext),
+  const {styles, day, setDay} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
-    [value, onChangeText] = React.useState('2004-01-14'),
-    [photos, setPhotos] = React.useState(true);
+    [photos, setPhotos] = React.useState([]);
 
   React.useEffect(() => {
     let endPoint =
@@ -45,32 +37,21 @@ const PhotosScreen = ({
     <SafeAreaView style={styles.container} testID="PhotosScreen">
       <MyCalendar
         onDayPress={(day: any) => {
-          onChangeText(day.dateString);
+          setDay(day.dateString);
         }}
       />
       <FlatList
-        data={photos.filter((photo: Photo) => photo.earth_date === value)}
+        data={photos.filter((photo: Photo) => photo.earth_date === day)}
         renderItem={({item}: any) => (
           <View style={[styles.viewCentered, {backgroundColor: '#A9F5A9'}]}>
-            <Text>{JSON.stringify(item)}</Text>
+            <Text>
+              {item.id} | {item.earth_date}
+            </Text>
+            {/* <Image style={styles.img} source={{uri: item.img_src}} /> */}
           </View>
         )}
         keyExtractor={(item: any) => item.id}
       />
-      {/*
-      <ScrollView style={styles.scrollView}>
-        {photos && photos.length >= 1 ? (
-          photos.map(({id, img_src}: Photo) => (
-            <View key={id} style={styles.viewCentered}>
-              <Text style={styles.img}>{img_src}</Text>
-              <Image style={styles.img} source={{uri: img_src}} />
-            </View>
-          ))
-        ) : (
-          <Text style={styles.screenTitle}>Photos not found</Text>
-        )}
-        </ScrollView>
-        */}
     </SafeAreaView>
   );
 };

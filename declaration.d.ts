@@ -1,6 +1,6 @@
 declare module 'react';
 declare module 'react-native';
-
+declare module 'react-native-calendars';
 declare module '@screens/*';
 declare module '@utils/_*';
 declare module '@assets/*';

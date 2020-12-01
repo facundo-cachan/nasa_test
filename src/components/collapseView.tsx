@@ -1,85 +1,76 @@
-import PropTypes from 'prop-types';
-import React, {Component} from 'react';
-import {View, Animated, TouchableOpacity} from 'react-native';
+import React, {useRef} from 'react';
+import {Animated, Text, View, StyleSheet, Button} from 'react-native';
+import {width, height} from '../utils/_dimensions';
 
-const propTypes = {
-  renderView: PropTypes.func.isRequired,
-  renderCollapseView: PropTypes.func.isRequired,
-  collapse: PropTypes.bool,
-  tension: PropTypes.number,
-};
-const defaultProps = {
-  collapse: false,
-  tension: 10,
-};
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#A9F5A9',
+  },
+  fadingContainer: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: 'powderblue',
+  },
+  fadingText: {
+    fontSize: 28,
+    textAlign: 'center',
+    margin: 10,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    marginVertical: 16,
+  },
+});
 
-class CollapseView extends Component {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      collapse: this.props.collapse,
-      animation: new Animated.Value(),
-    };
-  }
+const CollapseView = ({children}: any) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [h, setH] = React.useState(new Animated.Value(width));
+  const _show = () =>
+    Animated.spring(h, {
+      toValue: height,
+      friction: 1,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
 
-  collapse = () => {
-    const {startpoint, endpoint, animation, collapse} = this.state;
-    let startAnim = collapse ? endpoint + startpoint : startpoint;
-    let endAnim = collapse ? startpoint : startpoint + endpoint;
-    this.setState({
-      collapse: !this.state.collapse,
-    });
-
-    animation.setValue(startAnim);
-    Animated.spring(this.state.animation, {
-      toValue: endAnim,
-      tension: this.props.tension,
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: false,
     }).start();
   };
 
-  startpoint = (layout: any) => {
-    if (!this.state.collapse)
-      this.setState({
-        animation: new Animated.Value(layout.nativeEvent.layout.height),
-      });
-    this.setState({
-      startpoint: layout.nativeEvent.layout.height,
-    });
+  const fadeOut = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
   };
 
-  endpoint = (layout: any) => {
-    if (this.state.collapse)
-      this.setState({
-        animation: new Animated.Value(layout.nativeEvent.layout.height),
-      });
-    this.setState({
-      endpoint: layout.nativeEvent.layout.height,
-    });
-  };
+  console.log(fadeAnim);
 
-  render() {
-    const {startpoint, endpoint, animation, collapse} = this.state;
-    return (
+  return (
+    <View>
+      <View style={styles.buttonRow}>
+        <Button title="Ocultar" onPress={fadeOut} />
+        <Button title="Mostrar" onPress={_show} />
+      </View>
       <Animated.View
         style={{
-          height: this.state.animation,
-          backgroundColor: 'transparent',
-          overflow: 'hidden',
+          height: h,
+          /* opacity: fadeAnim */
         }}>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={this.collapse}
-          onLayout={this.startpoint}>
-          {this.props.renderView(this.state.collapse)}
-        </TouchableOpacity>
-        <View onLayout={this.endpoint}>
-          {this.props.renderCollapseView(this.state.collapse)}
-        </View>
+        <Text style={styles.fadingText}>{children}</Text>
       </Animated.View>
-    );
-  }
-}
+    </View>
+  );
+};
 
-CollapseView.propTypes = propTypes;
-CollapseView.defaultProps = defaultProps;
 export default CollapseView;
