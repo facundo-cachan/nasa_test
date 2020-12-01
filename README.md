@@ -9,15 +9,15 @@
 - [x] Allows the user to see the photos of each rover (Curiosity, Opportunity and Spirit)
 - [x] The photos list should be paginated showing a max of 25 photos per page (dynamic loading similar to facebook/instagram will be nice, not required)
 - [x] Allows the user to filter the rover photos by camera
-- [ ] default it shows the latest photos for current day
-- [ ] lows the user to search for photos based on 'Earth Day' date (2020-09-2
-- [ ] lows the user to search for photos based on the 'Sol' date (289
+- [x] default it shows the latest photos for current day
+- [x] lows the user to search for photos based on 'Earth Day' date (2020-09-2
+- [ ] lows the user to search for photos based on the 'Sol' date (289)
 
 `Optional:`
 
-- Allow the user to save search parameters in Local Storage
-- A lot of extra points if you include a few tests.
-- We don't care about the UX design, but a nicely styled app would get extra points :D
+- [ ] Allow the user to save search parameters in Local Storage
+- [ ] A lot of extra points if you include a few tests.
+- [x] We don't care about the UX design, but a nicely styled app would get extra points :D
 
 Notes:
 

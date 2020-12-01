@@ -116,6 +116,21 @@ const Stack = createStackNavigator(),
         }}
         component={CamerasStackNavigator}
       />
+      <Tab.Screen
+        name="Photos"
+        options={{
+          tabBarLabel: 'Photos',
+          tabBarIcon: ({color, size}: {color: string; size: number}) => (
+            <Icon
+              type="Ionicons"
+              name="image-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+        component={PhotosScreen}
+      />
     </Tab.Navigator>
   );
 

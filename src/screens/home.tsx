@@ -2,6 +2,7 @@ import React from 'react';
 import {SafeAreaView, Text} from 'react-native';
 import {Loading, MyCalendar} from '@components';
 import {AppContext} from '@navigation/AppProvider';
+import formatDate from '@utils/_formatDate';
 
 const HomeScreen = () => {
   const {styles} = React.useContext(AppContext),
@@ -24,6 +25,7 @@ const HomeScreen = () => {
         }}
       />
       <Text>{text}</Text>
+      <Text>earth_date {formatDate(Date())}</Text>
     </SafeAreaView>
   );
 };
