@@ -10,7 +10,13 @@ import roversJSON from '../mocks/rover.json';
 const RoversScreen = ({route: {params}, navigation}: any) => {
   const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
-    [rovers, setRovers] = React.useState([]);
+    [rovers, setRovers] = React.useState([]),
+    btnStyle = {
+      buttonContainer: styles.buttonContainer,
+      iconWrapper: styles.iconWrapper,
+      btnTxtWrapper: styles.btnTxtWrapper,
+      buttonText: styles.buttonText,
+    };
 
   React.useEffect(() => {
     if (params === undefined) {
@@ -43,6 +49,7 @@ const RoversScreen = ({route: {params}, navigation}: any) => {
               }}
               label={id}
               icon="car"
+              styles={btnStyle}
             />
           ))
         : rovers.map(({id, cameras}: Rover) => (
@@ -56,6 +63,7 @@ const RoversScreen = ({route: {params}, navigation}: any) => {
               }}
               label={id.toUpperCase()}
               icon="car"
+              styles={btnStyle}
             />
           ))}
     </SafeAreaView>

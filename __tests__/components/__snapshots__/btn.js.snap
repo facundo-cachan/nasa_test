@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing components Btn test 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#58D3F7",
+      "borderRadius": 3,
+      "flexDirection": "row",
+      "height": 88.93333333333334,
+      "justifyContent": "space-between",
+      "margin": 10,
+      "opacity": 1,
+      "padding": 10,
+    }
+  }
+  testID="btn01"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "width": 30,
+      }
+    }
+  >
+    <Text
+      allowFontScaling={false}
+      onPress={null}
+      style={
+        Array [
+          Object {
+            "color": "#F7D358",
+            "fontSize": 22,
+          },
+          Object {},
+          Object {
+            "fontFamily": "FontAwesome5Free-Solid",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {
+            "fontWeight": "900",
+          },
+        ]
+      }
+      type="FontAwesome5"
+    >
+      
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "fontSize": 18,
+            "fontWeight": "bold",
+          },
+          Object {
+            "color": "#BCA9F5",
+          },
+        ]
+      }
+    >
+      Test Button
+    </Text>
+  </View>
+</View>
+`;

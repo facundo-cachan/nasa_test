@@ -49,6 +49,7 @@ const MyCalendar = (props: any) => {
           Alert.alert('Modal has been closed.');
         }}>
         <CalendarList
+          testID="calendar"
           style={{
             width,
             height: width,

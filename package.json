@@ -13,9 +13,6 @@
       "eslint --ext .tsx,.ts src --fix"
     ]
   },
-  "jest": {
-    "preset": "react-native"
-  },
   "rnpm": {
     "assets": [
       "./assets/fonts/"
@@ -71,7 +68,10 @@
     "@babel/preset-typescript": "^7.12.7",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@testing-library/jest-native": "^3.4.3",
+    "@testing-library/react-native": "^7.1.0",
     "@types/express": "^4.17.9",
+    "@types/jest": "^26.0.15",
     "@types/react": "^17.0.0",
     "@types/react-native": "^0.63.37",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
@@ -79,7 +79,6 @@
     "babel-jest": "^25.1.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-typescript-metadata": "^0.3.1",
-    "detox": "^17.14.1",
     "eslint": "^6.5.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.21.5",
@@ -88,7 +87,7 @@
     "jest": "^25.1.0",
     "lint-staged": "^10.5.2",
     "metro-react-native-babel-preset": "^0.59.0",
-    "mocha": "^8.2.1",
+    "react-native-testing-library": "^6.0.0",
     "react-test-renderer": "16.13.1",
     "ts-node": "^9.0.0",
     "typescript": "^4.1.2"

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-dynamic-vector-icons';
-import {AppContext} from '@navigation/AppProvider';
-
+// import {AppContext} from '@navigation/AppProvider';
+// import styles from '../styles/light';
 const Btn = ({
   label,
   icon,
@@ -11,6 +11,7 @@ const Btn = ({
   size,
   backgroundColor,
   textColor,
+  styles,
   ...rest
 }: {
   label: string;
@@ -19,10 +20,11 @@ const Btn = ({
   color: string;
   size: number;
   textColor: string;
+  styles: any;
   backgroundColor: string;
 }) => {
-  const bgColor = backgroundColor || '#000',
-    {styles} = React.useContext(AppContext);
+  const bgColor = backgroundColor || '#000';
+  // {styles} = React.useContext(AppContext);
   return (
     <TouchableOpacity
       testID="btn01"

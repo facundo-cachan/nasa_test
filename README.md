@@ -25,6 +25,6 @@ Notes:
 - [x] You can use Redux but we prefer Context
 - [x] We will check for coding style and consistency mostly, we are interested in seeing how you think and organize a project.
 - [x] Please use a linter!
-- [x] When you finish the test, push it as a public repository in github, gitlab, bitbucket or similar and send us the repository URL.
+- [x] When you finish the test, push it as a public repository in github ~~, gitlab, bitbucket or similar~~ and send us the repository URL.
 
 **_To avoid restricting the number of inquiries, carry them out locally._**
