@@ -9,6 +9,7 @@ import HomeScreen from '@screens/home';
 import RoversScreen from '@screens/rovers';
 import CamerasScreen from '@screens/cameras';
 import PhotosScreen from '@screens/photos';
+import ProfileScreen from '@screens/profile';
 
 const Stack = createStackNavigator(),
   Tab = createBottomTabNavigator(),
@@ -130,6 +131,21 @@ const Stack = createStackNavigator(),
           ),
         }}
         component={PhotosScreen}
+      />
+      <Tab.Screen
+        name="Profile"
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({color, size}: {color: string; size: number}) => (
+            <Icon
+              type="Ionicons"
+              name="person-circle-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+        component={ProfileScreen}
       />
     </Tab.Navigator>
   );

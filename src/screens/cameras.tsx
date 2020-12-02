@@ -1,65 +1,69 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Loading, Btn} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
 import type {Camera} from '../interfaces';
-
-import mockCameras from '../mocks/cameras.json';
+import Capitalize from '@utils/_capitalize';
 
 const CamerasScreen = ({route: {params}, navigation}: any) => {
-  const {styles} = React.useContext(AppContext),
+  const {styles, url} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
-    [cameras, setCameras] = React.useState([]),
+    [data, setData] = React.useState([]),
+    key = 'cameras',
     btnStyle = {
       buttonContainer: styles.buttonContainer,
       iconWrapper: styles.iconWrapper,
       btnTxtWrapper: styles.btnTxtWrapper,
       buttonText: styles.buttonText,
     };
-
   React.useEffect(() => {
-    if (params === undefined) {
-      const cameras = mockCameras;
-      setCameras(cameras);
+    console.log('CamerasScreen', params);
+    if (params) {
+      setData(params.cameras);
+      AsyncStorage.setItem(key, JSON.stringify(params.cameras));
     } else {
-      setCameras(params.cameras);
+      fetch(`${url}/cameras`)
+        .then((response) => response.json())
+        .then((json) => {
+          setData(json);
+          AsyncStorage.setItem(key, JSON.stringify(json));
+        })
+        .catch((error) => console.error(error));
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-
+    setLoading(!loading);
+  }, [params]);
   return loading ? (
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="CamerasScreen">
       {params
-        ? cameras.map((camera: string) => (
-            <Btn
-              key={camera}
-              onPress={() => {
-                navigation.navigate('Photos', {
-                  rover: params.id,
-                  camera,
-                });
-              }}
-              label={camera.toUpperCase()}
-              icon="camera"
-              styles={btnStyle}
-            />
-          ))
-        : cameras.map(({id, name}: Camera) => (
+        ? data.map((camera: any, id: any) => (
             <Btn
               key={id}
+              label={`${Capitalize(camera)} | ${Capitalize(params.id)}`}
+              icon="images"
+              styles={btnStyle}
+              onPress={() => {
+                navigation.navigate('Photos', {
+                  camera,
+                  rover: params.id,
+                });
+              }}
+            />
+          ))
+        : data.map(({id, name}: Camera) => (
+            <Btn
+              key={id}
+              label={`${Capitalize(id)} | ${Capitalize(name)}`}
+              icon="car"
+              styles={btnStyle}
               onPress={() => {
                 navigation.navigate('Rovers', {
                   id,
                 });
               }}
-              label={name.toUpperCase()}
-              icon="camera"
-              styles={btnStyle}
             />
           ))}
     </SafeAreaView>

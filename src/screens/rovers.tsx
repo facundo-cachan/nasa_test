@@ -1,36 +1,67 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, Text} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Loading, Btn} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
 import type {Rover} from '../interfaces';
-
-import roversJSON from '../mocks/rover.json';
+import Capitalize from '@utils/_capitalize';
+import log from '@utils/_log';
 
 const RoversScreen = ({route: {params}, navigation}: any) => {
-  const {styles} = React.useContext(AppContext),
+  const {styles, url} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
-    [rovers, setRovers] = React.useState([]),
+    [data, setData] = React.useState([]),
+    key = 'rovers',
     btnStyle = {
       buttonContainer: styles.buttonContainer,
       iconWrapper: styles.iconWrapper,
       btnTxtWrapper: styles.btnTxtWrapper,
       buttonText: styles.buttonText,
-    };
+    },
+    fetched = () =>
+      fetch(url)
+        .then((response) => response.json())
+        .then((json) => {
+          AsyncStorage.setItem(key, JSON.stringify(json));
+          setData(json);
+        })
+        .catch((error) => console.error(error))
+        .finally(async () => {
+          if (params) {
+            log('PARAMS', {params});
+          }
+        });
+
   React.useEffect(() => {
-    if (params === undefined) {
-      setRovers(roversJSON);
+    console.log('RoversScreen');
+    log('PARAMS', {params});
+    if (!params) {
+      AsyncStorage.getItem(key).then((value) => {
+        if (value) {
+          setData(JSON.parse(value));
+        } else {
+          log('ELSE');
+          fetched;
+        }
+      });
     } else {
-      setRovers(
-        roversJSON.filter((rover: Rover) => {
-          console.log(rover);
-          if (Object(rover.cameras).includes(params.id)) return rover.id;
-        }),
-      );
+      AsyncStorage.getItem('cameras').then((value) => {
+        if (value) {
+          AsyncStorage.getItem(key).then((value) => {
+            if (value) {
+              const rovers = JSON.parse(value).filter((rover: any) =>
+                rover.cameras.includes(params.id),
+              );
+              setData(rovers);
+            } else {
+              log('ELSE');
+            }
+          });
+        }
+      });
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    setLoading(!loading);
   }, []);
 
   return loading ? (
@@ -38,7 +69,7 @@ const RoversScreen = ({route: {params}, navigation}: any) => {
   ) : (
     <SafeAreaView style={styles.container} testID="RoversScreen">
       {params
-        ? rovers.map(({id}: Rover) => (
+        ? data.map(({id}: Rover) => (
             <Btn
               key={id}
               onPress={() => {
@@ -47,12 +78,12 @@ const RoversScreen = ({route: {params}, navigation}: any) => {
                   camera: params.id,
                 });
               }}
-              label={id}
+              label={`${Capitalize(id)} - Photos`}
               icon="car"
               styles={btnStyle}
             />
           ))
-        : rovers.map(({id, cameras}: Rover) => (
+        : data.map(({id, cameras}: Rover) => (
             <Btn
               key={id}
               onPress={() => {
@@ -61,7 +92,7 @@ const RoversScreen = ({route: {params}, navigation}: any) => {
                   cameras,
                 });
               }}
-              label={id.toUpperCase()}
+              label={`${Capitalize(id)} - Cameras`}
               icon="car"
               styles={btnStyle}
             />

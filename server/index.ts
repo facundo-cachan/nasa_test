@@ -1,19 +1,39 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import express, {Request, Response} from 'express';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import log from '../src/utils/_log';
 
 const app = express(),
   PORT = 8000;
 
 app
-  .get('/', (_: any, res: Response) => res.send('Express + TypeScript Server'))
-  .get('/:rover/:camera', (req: Request, res: Response) => {
-    const {rover, camera} = req.params;
-    const rovers = require(`./data/${rover}.json`);
+  .use(morgan('tiny'))
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({extended: true}))
+  .get('/', (_: any, res: Response) => {
+    const rovers = require('./data/rovers.json');
+    log('ROVERS', rovers);
     res.status(200).json(rovers);
+  })
+  .get('/:rover/photos', (req: Request, res: Response) => {
+    log('BODY', req.body);
+    log('PARAMS', req.params);
+    /* 
+    const { rover } = req.params;
+    console.log('ROVER',rover);
+     */
+    //const rovers = require(`./data/${rover}.json`);
+    res.status(200); //.json(rovers);
+  })
+  .get('/cameras', (_: any, res: Response) => {
+    const cameras = require('./data/cameras.json');
+    log('CAMERAS', cameras);
+    res.status(200).json(cameras);
   })
   .listen(PORT, () => {
     console.clear();
-    console.log(`⚡️ Server is running at http://localhost:${PORT}`);
+    console.log(`⚡️ Server running http://localhost:${PORT}`);
   });
 
 /**

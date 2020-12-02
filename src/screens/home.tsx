@@ -4,7 +4,7 @@ import {Loading, MyCalendar, Btn} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 import formatDate from '@utils/_formatDate';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}:any) => {
   const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
     [text, setText] = React.useState(formatDate(Date())),
@@ -18,7 +18,7 @@ const HomeScreen = () => {
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 500);
   }, []);
 
   return loading ? (
@@ -37,6 +37,18 @@ const HomeScreen = () => {
         styles={btnStyle}
       />
       <Text>{text}</Text>
+      <Btn
+        onPress={() => {
+          navigation.navigate('Rovers', {
+            id: 'spirit',
+            img: null,
+            cameras: ['fhaz', 'rhaz', 'navcam', 'pancam', 'minites'],
+          });
+        }}
+        label="Go Rovers"
+        icon="car"
+        styles={btnStyle}
+      />
     </SafeAreaView>
   );
 };

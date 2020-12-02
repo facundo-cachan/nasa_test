@@ -1,71 +1,10 @@
 import React from 'react';
-import {SafeAreaView, View, Image, Text, FlatList} from 'react-native';
-
-import {Loading, MyCalendar} from '@components';
-import {AppContext} from '@navigation/AppProvider';
-
-import formatDate from '@utils/_formatDate';
-import type {Photo, Rover} from '../interfaces';
-
-import mockRovers from '../mocks/rover.json';
+import {SafeAreaView, Text} from 'react-native';
 
 const PhotosScreen = ({route: {params}}: any) => {
-  const {styles} = React.useContext(AppContext),
-    [loading, setLoading] = React.useState(true),
-    [day, setDay] = React.useState('2004-01-14'), /** formatDate(Date()) */
-    [photos, setPhotos] = React.useState([]),
-    fetched = (endPoint: string) =>
-      fetch(endPoint)
-        .then((response) => response.json())
-        .then((json) =>
-          json.photos && json.photos.length >= 1
-            ? setPhotos(photos.concat(json.photos))
-            : null,
-        )
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false)
-        );
-
-  React.useEffect(() => {
-    if (params === undefined) {
-      const Rovers = mockRovers;
-      Rovers.map(({id}: Rover, k: number) => {
-        const currentPhotos = `https://api.nasa.gov/mars-photos/api/v1/rovers/${id}/photos?earth_date=${day}&page=${
-          k + 1
-        }&api_key=DEMO_KEY`;
-        fetched(currentPhotos);
-      });
-    } else {
-      const {camera, rover} = params;
-      const endPoint =
-        process.env.NODE_ENV === 'development'
-          ? `http://localhost:8000/${rover}/${camera}`
-          : `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=10&camera=${camera}&api_key=DEMO_KEY`;
-      fetched(endPoint);
-    }
-  }, []);
-
-  return loading ? (
-    <Loading />
-  ) : (
-    <SafeAreaView style={styles.container} testID="PhotosScreen">
-      <MyCalendar
-        onDayPress={(day: any) => {
-          setDay(day.dateString);
-        }}
-      />
-      <FlatList
-        data={photos.filter((photo: Photo) => photo.earth_date === day)}
-        renderItem={({item}: any) => (
-          <View style={[styles.viewCentered, {backgroundColor: '#A9F5A9'}]}>
-            <Text>
-              {item.id} | {item.earth_date}
-            </Text>
-            <Image style={styles.img} source={{uri: item.img_src, cache: 'force-cache'}}/>
-          </View>
-        )}
-        keyExtractor={(item: any) => item.id.toString()}
-      />
+  return (
+    <SafeAreaView testID="PhotosScreen">
+      <Text>{JSON.stringify(params)}</Text>
     </SafeAreaView>
   );
 };

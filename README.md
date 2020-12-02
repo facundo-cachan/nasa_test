@@ -22,8 +22,8 @@
 - [x] The photos list should be paginated showing a max of 25 photos per page (dynamic loading similar to facebook/instagram will be nice, not required)
 - [x] Allows the user to filter the rover photos by camera
 - [x] default it shows the latest photos for current day
-- [x] lows the user to search for photos based on 'Earth Day' date (2020-09-2
-- [ ] lows the user to search for photos based on the 'Sol' date (289)
+- [x] Allows the user to search for photos based on 'Earth Day' date (2020-09-2
+- [ ] Allows the user to search for photos based on the 'Sol' date (289)
 
 `Optional:`
 
