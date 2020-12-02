@@ -60,4 +60,4 @@ buck-out/
 /ios/Podfile.lock
 
 #Test Snapshots
-/__test__/**/__snapshots__/
+/__tests__/**/__snapshots__/

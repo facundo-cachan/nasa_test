@@ -32,14 +32,14 @@ const PhotosScreen = ({route: {params}}: any) => {
     if (params === undefined) {
       const Rovers = mockRovers;
       Rovers.map(({id}: Rover, k: number) => {
-        let currentPhotos = `https://api.nasa.gov/mars-photos/api/v1/rovers/${id}/photos?earth_date=${day}&page=${
+        const currentPhotos = `https://api.nasa.gov/mars-photos/api/v1/rovers/${id}/photos?earth_date=${day}&page=${
           k + 1
         }&api_key=DEMO_KEY`;
         fetched(currentPhotos);
       });
     } else {
       const {camera, rover} = params;
-      let endPoint =
+      const endPoint =
         process.env.NODE_ENV === 'development'
           ? `http://localhost:8000/${rover}/${camera}`
           : `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=10&camera=${camera}&api_key=DEMO_KEY`;
