@@ -3,7 +3,6 @@
 
   <a href="https://api.nasa.gov/">
     <img
-      height="80"
       width="80"
       alt="NASA Logo"
       src="https://github.com/facundo-cachan/nasa_test/blob/master/src/assets/images/logo.png"

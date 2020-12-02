@@ -4,13 +4,15 @@ import {SafeAreaView, View, Image, Text, FlatList} from 'react-native';
 import {Loading, MyCalendar} from '@components';
 import {AppContext} from '@navigation/AppProvider';
 
+import formatDate from '@utils/_formatDate';
 import type {Photo, Rover} from '../interfaces';
 
 import mockRovers from '../mocks/rover.json';
 
 const PhotosScreen = ({route: {params}}: any) => {
-  const {styles, day, setDay} = React.useContext(AppContext),
+  const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
+    [day, setDay] = React.useState('2004-01-14'), /** formatDate(Date()) */
     [photos, setPhotos] = React.useState([]),
     fetched = (endPoint: string) =>
       fetch(endPoint)
@@ -21,11 +23,7 @@ const PhotosScreen = ({route: {params}}: any) => {
             : null,
         )
         .catch((error) => console.error(error))
-        .finally(() =>
-          setTimeout(() => {
-            console.log(endPoint);
-            setLoading(false);
-          }, 500),
+        .finally(() => setLoading(false)
         );
 
   React.useEffect(() => {
@@ -63,10 +61,10 @@ const PhotosScreen = ({route: {params}}: any) => {
             <Text>
               {item.id} | {item.earth_date}
             </Text>
-            <Image style={styles.img} source={{uri: item.img_src}} />
+            <Image style={styles.img} source={{uri: item.img_src, cache: 'force-cache'}}/>
           </View>
         )}
-        keyExtractor={(item: any) => item.id}
+        keyExtractor={(item: any) => item.id.toString()}
       />
     </SafeAreaView>
   );
