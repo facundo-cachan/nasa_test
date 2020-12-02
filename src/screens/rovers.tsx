@@ -17,13 +17,13 @@ const RoversScreen = ({route: {params}, navigation}: any) => {
       btnTxtWrapper: styles.btnTxtWrapper,
       buttonText: styles.buttonText,
     };
-
   React.useEffect(() => {
     if (params === undefined) {
       setRovers(roversJSON);
     } else {
       setRovers(
         roversJSON.filter((rover: Rover) => {
+          console.log(rover);
           if (Object(rover.cameras).includes(params.id)) return rover.id;
         }),
       );

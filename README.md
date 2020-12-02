@@ -1,6 +1,19 @@
----
+<div align="center">
+  <h1>React Native Test App</h1>
 
-**React Native Test App :)**
+  <a href="https://api.nasa.gov/">
+    <img
+      height="80"
+      width="80"
+      alt="eagle"
+      src="https://github.com/facundo-cachan/nasa_test/tree/master/src/assets/images/logo.png"
+    />
+  </a>
+
+  <p>Custom on React Native application to consume NASA image api.</p>
+</div>
+
+<hr />
 
 #### Using React Native, build an app that:
 
@@ -16,7 +29,7 @@
 `Optional:`
 
 - [ ] Allow the user to save search parameters in Local Storage
-- [ ] A lot of extra points if you include a few tests.
+- [x] A lot of extra points if you include a few tests.
 - [x] We don't care about the UX design, but a nicely styled app would get extra points :D
 
 Notes:

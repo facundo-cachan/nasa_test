@@ -7,12 +7,18 @@ import formatDate from '@utils/_formatDate';
 const HomeScreen = () => {
   const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
-    [text, setText] = React.useState();
+    [text, setText] = React.useState(formatDate(Date())),
+    btnStyle = {
+      buttonContainer: styles.buttonContainer,
+      iconWrapper: styles.iconWrapper,
+      btnTxtWrapper: styles.btnTxtWrapper,
+      buttonText: styles.buttonText,
+    };
 
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 3000);
   }, []);
 
   return loading ? (
@@ -20,23 +26,17 @@ const HomeScreen = () => {
   ) : (
     <SafeAreaView style={styles.container} testID="HomeScreen">
       <MyCalendar
-        onPress={(day: any) => {
+        onDayPress={(day: any) => {
           setText(day.dateString);
         }}
       />
-      <Text>{text}</Text>
-      <Text>earth_date {formatDate(Date())}</Text>
       <Btn
         onPress={() => console.log('Btn Pressed')}
         label="Button"
         icon="car"
-        styles={{
-          buttonContainer: styles.buttonContainer,
-          iconWrapper: styles.iconWrapper,
-          btnTxtWrapper: styles.btnTxtWrapper,
-          buttonText: styles.buttonText,
-        }}
+        styles={btnStyle}
       />
+      <Text>{text}</Text>
     </SafeAreaView>
   );
 };

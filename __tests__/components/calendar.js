@@ -1,10 +1,10 @@
 import React from 'react'
-import { fireEvent, render, waitFor } from 'test-utils'
+import { render } from 'test-utils'
 
 import { MyCalendar } from '@components'
 
 const MyCalendarTest = () => {
-    const [day, setDay] = React.useState();
+    const [, setDay] = React.useState();
     return <MyCalendar
         onPress={(day) => {
             setDay(day.dateString);
@@ -15,7 +15,7 @@ const MyCalendarTest = () => {
 
 describe('Testing components', () => {
     test('Calendar test', async () => {
-        const { getByTestId, toJSON, queryByTestId } = render(<MyCalendarTest />);
+        const { toJSON } = render(<MyCalendarTest />);
         expect(toJSON()).toMatchSnapshot()
     })
 })

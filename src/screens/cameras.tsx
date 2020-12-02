@@ -5,14 +5,22 @@ import {AppContext} from '@navigation/AppProvider';
 
 import type {Camera} from '../interfaces';
 
+import mockCameras from '../mocks/cameras.json';
+
 const CamerasScreen = ({route: {params}, navigation}: any) => {
   const {styles} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
-    [cameras, setCameras] = React.useState([]);
+    [cameras, setCameras] = React.useState([]),
+    btnStyle = {
+      buttonContainer: styles.buttonContainer,
+      iconWrapper: styles.iconWrapper,
+      btnTxtWrapper: styles.btnTxtWrapper,
+      buttonText: styles.buttonText,
+    };
 
   React.useEffect(() => {
     if (params === undefined) {
-      const cameras = require('../mocks/cameras.json');
+      const cameras = mockCameras;
       setCameras(cameras);
     } else {
       setCameras(params.cameras);
@@ -38,6 +46,7 @@ const CamerasScreen = ({route: {params}, navigation}: any) => {
               }}
               label={camera.toUpperCase()}
               icon="camera"
+              styles={btnStyle}
             />
           ))
         : cameras.map(({id, name}: Camera) => (
@@ -50,6 +59,7 @@ const CamerasScreen = ({route: {params}, navigation}: any) => {
               }}
               label={name.toUpperCase()}
               icon="camera"
+              styles={btnStyle}
             />
           ))}
     </SafeAreaView>

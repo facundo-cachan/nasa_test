@@ -1,7 +1,7 @@
 export type Rover = {
   id: string;
-  img: string;
-  cameras?: string[];
+  img?: string | null;
+  cameras?: Array<string>;
 };
 
 export type Camera = {

@@ -6,6 +6,8 @@ import {AppContext} from '@navigation/AppProvider';
 
 import type {Photo, Rover} from '../interfaces';
 
+import mockRovers from '../mocks/rover.json';
+
 const PhotosScreen = ({route: {params}}: any) => {
   const {styles, day, setDay} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
@@ -28,7 +30,7 @@ const PhotosScreen = ({route: {params}}: any) => {
 
   React.useEffect(() => {
     if (params === undefined) {
-      const Rovers = require('../mocks/rover.json');
+      const Rovers = mockRovers;
       Rovers.map(({id}: Rover, k: number) => {
         let currentPhotos = `https://api.nasa.gov/mars-photos/api/v1/rovers/${id}/photos?earth_date=${day}&page=${
           k + 1

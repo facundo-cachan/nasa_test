@@ -58,3 +58,6 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 /ios/Podfile.lock
+
+#Test Snapshots
+/__test__/**/__snapshots__/
