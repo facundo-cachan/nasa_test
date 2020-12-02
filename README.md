@@ -5,8 +5,8 @@
     <img
       height="80"
       width="80"
-      alt="eagle"
-      src="https://github.com/facundo-cachan/nasa_test/tree/master/src/assets/images/logo.png"
+      alt="NASA Logo"
+      src="/assets/images/logo.png"
     />
   </a>
 
