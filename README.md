@@ -6,7 +6,7 @@
       height="80"
       width="80"
       alt="NASA Logo"
-      src="/assets/images/logo.png"
+      src="https://github.com/facundo-cachan/nasa_test/blob/master/src/assets/images/logo.png"
     />
   </a>
 
