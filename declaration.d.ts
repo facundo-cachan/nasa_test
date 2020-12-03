@@ -1,6 +1,7 @@
 declare module 'react';
 declare module 'react-native';
 declare module 'react-native-calendars';
+declare module 'react-native-onboarding-swiper';
 declare module 'morgan';
 declare module '@screens/*';
 declare module '@utils/_*';

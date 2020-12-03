@@ -42,7 +42,7 @@ const CamerasScreen = ({route: {params}, navigation}: any) => {
         ? data.map((camera: any, id: any) => (
             <Btn
               key={id}
-              label={`${Capitalize(camera)} | ${Capitalize(params.id)}`}
+              label={Capitalize(camera)}
               icon="images"
               styles={btnStyle}
               onPress={() => {
@@ -56,7 +56,7 @@ const CamerasScreen = ({route: {params}, navigation}: any) => {
         : data.map(({id, name}: Camera) => (
             <Btn
               key={id}
-              label={`${Capitalize(id)} | ${Capitalize(name)}`}
+              label={Capitalize(id)}
               icon="car"
               styles={btnStyle}
               onPress={() => {

@@ -7,21 +7,14 @@ import {AppContext} from '@navigation/AppProvider';
 import type {Photo, Rover} from '../interfaces';
 
 const PhotosScreen = ({route: {params}}: any) => {
-  const {styles} = React.useContext(AppContext),
+  const {styles, url} = React.useContext(AppContext),
     [loading, setLoading] = React.useState(true),
     [data, setData] = React.useState(),
-    [day, setDay] = React.useState('2004-01-14') /** formatDate(Date()) */,
-    url = 'https://api.nasa.gov/mars-photos/api/v1/rovers';
+    [day, setDay] = React.useState('2004-01-14'); /** formatDate(Date()) */
 
   React.useEffect(() => {
-    console.log('PhotosScreen');
-    console.log('PARAMS', params);
     if (params) {
       setData(params);
-      console.log(
-        params,
-        `${url}/${params.rover}/photos?&api_key=DEMO_KEY&sol=10&camera=${params.camera}`,
-      );
       fetch(
         `${url}/${params.rover}/photos?&api_key=DEMO_KEY&sol=10&camera=${params.camera}`,
       )
@@ -31,25 +24,16 @@ const PhotosScreen = ({route: {params}}: any) => {
         })
         .catch((error) => console.error(error));
     } else {
-      console.log('not PARAMS');
       AsyncStorage.getItem('rovers').then((rovers) => {
         if (rovers) {
-          JSON.parse(rovers).map(
-            ({id}: Rover, k: number) =>
-              console.log(
-                `${url}/${id}/photos?api_key=DEMO_KEY&sol=10&earth_date=${day}&page=${
-                  k + 1
-                }`,
-              ),
-            /*
-            fetch(`${url}/${id}/photos?api_key=DEMO_KEY&earth_date=${day}`)
+          JSON.parse(rovers).map(({id}: Rover) =>
+            fetch(`${url}/${id}/photos/api_key=DEMO_KEY&earth_date=${day}`)
               .then((response) => response.json())
               .then((json) => {
                 setData(json);
                 AsyncStorage.setItem(String(day), JSON.stringify(json));
               })
               .catch((error) => console.error(error)),
-              */
           );
         }
       });
@@ -60,12 +44,25 @@ const PhotosScreen = ({route: {params}}: any) => {
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="PhotosScreen">
+      <FlatList
+        data={JSON.parse(data).filter(
+          (photo: Photo) => photo.earth_date === day,
+        )}
+        renderItem={({item}: any) => (
+          <View style={styles.viewCentered}>
+            <Image
+              style={styles.img}
+              source={{uri: item.img_src, cache: 'force-cache'}}
+            />
+          </View>
+        )}
+        keyExtractor={(item: any) => item.id.toString()}
+      />
       <MyCalendar
         onDayPress={(day: any) => {
           setDay(day.dateString);
         }}
       />
-      <Text>{JSON.stringify(data)}</Text>
     </SafeAreaView>
   );
 };

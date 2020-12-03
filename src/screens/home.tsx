@@ -1,55 +1,69 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
-import {Loading, MyCalendar, Btn} from '@components';
-import {AppContext} from '@navigation/AppProvider';
-import formatDate from '@utils/_formatDate';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
+import Onboarding from 'react-native-onboarding-swiper';
 
-const HomeScreen = ({navigation}:any) => {
-  const {styles} = React.useContext(AppContext),
-    [loading, setLoading] = React.useState(true),
-    [text, setText] = React.useState(formatDate(Date())),
-    btnStyle = {
-      buttonContainer: styles.buttonContainer,
-      iconWrapper: styles.iconWrapper,
-      btnTxtWrapper: styles.btnTxtWrapper,
-      buttonText: styles.buttonText,
-    };
+const txt = {fontSize: 16, color: '#fff'};
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
+const Dots = () => (
+  <View
+    style={{
+      width: 6,
+      height: 6,
+      marginHorizontal: 3,
+      backgroundColor: txt.color,
+    }}
+  />
+);
 
-  return loading ? (
-    <Loading />
-  ) : (
-    <SafeAreaView style={styles.container} testID="HomeScreen">
-      <MyCalendar
-        onDayPress={(day: any) => {
-          setText(day.dateString);
-        }}
-      />
-      <Btn
-        onPress={() => console.log('Btn Pressed')}
-        label="Button"
-        icon="car"
-        styles={btnStyle}
-      />
-      <Text>{text}</Text>
-      <Btn
-        onPress={() => {
-          navigation.navigate('Rovers', {
-            id: 'spirit',
-            img: null,
-            cameras: ['fhaz', 'rhaz', 'navcam', 'pancam', 'minites'],
-          });
-        }}
-        label="Go Rovers"
-        icon="car"
-        styles={btnStyle}
-      />
-    </SafeAreaView>
+const Skip = ({...props}) => (
+  <TouchableOpacity style={{marginHorizontal: 10}} {...props}>
+    <Text style={txt}>Skip</Text>
+  </TouchableOpacity>
+);
+
+const Next = ({...props}) => (
+  <TouchableOpacity style={{marginHorizontal: 10}} {...props}>
+    <Text style={txt}>Next</Text>
+  </TouchableOpacity>
+);
+
+const Done = ({...props}) => (
+  <TouchableOpacity style={{marginHorizontal: 10}} {...props}>
+    <Text style={txt}>Done</Text>
+  </TouchableOpacity>
+);
+
+const HomeScreen = ({navigation}: any) => {
+  navigation.setOptions({tabBarVisible: false});
+  return (
+    <Onboarding
+      SkipButtonComponent={Skip}
+      NextButtonComponent={Next}
+      DoneButtonComponent={Done}
+      DotComponent={Dots}
+      onSkip={() => navigation.replace('Rovers')}
+      onDone={() => navigation.navigate('Rovers')}
+      pages={[
+        {
+          backgroundColor: '#000',
+          image: <Image source={require('@assets/images/background.png')} />,
+          title: 'NASA',
+          subtitle: 'Mars Exploration Program',
+        },
+        {
+          backgroundColor: '#FAAC58',
+          image: <Image source={require('@assets/images/background2.jpg')} />,
+          title: 'Rovers',
+          subtitle: 'From Robots to Humans',
+        },
+        {
+          backgroundColor: '#fff',
+          image: <Image source={require('@assets/images/background3.jpg')} />,
+          title: 'MEP',
+          subtitle: 'Mars Exploration Program',
+        },
+      ]}
+    />
   );
 };
 

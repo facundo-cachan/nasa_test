@@ -7,18 +7,16 @@ export default {
     height,
     flexDirection: 'column',
     marginTop: 1,
-    backgroundColor: '#424242',
   },
   scrollView: {
     width,
     height: height + width,
-    backgroundColor: '#4646',
   },
   screenTitle: {
     width,
-    fontSize: 22,
+    height: 100,
+    fontSize: 50,
     textAlign: 'center',
-    backgroundColor: '#4646',
   },
   headerLogo: {width: 50, height: 50},
   viewCentered: {
@@ -62,5 +60,9 @@ export default {
   headerTintColor: '#fff',
   headerTitleStyle: {
     fontWeight: 'bold',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'stretch',
   },
 };

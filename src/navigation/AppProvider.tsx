@@ -10,7 +10,7 @@ export const AppProvider = ({children}: any) => {
     url =
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:8000'
-        : 'https://api.nasa.gov/mars-photos/api/v1/rovers/api_key=DEMO_KEY';
+        : 'https://api.nasa.gov/mars-photos/api/v1/rovers/';
   return (
     <AppContext.Provider
       value={{

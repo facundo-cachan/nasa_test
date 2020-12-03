@@ -28,8 +28,13 @@ const Stack = createStackNavigator(),
     headerBackTitleVisible: false,
     headerLeft: () => null,
   },
-  RoversStackNavigator = () => (
+  RoversStackNavigator = ({navigation, route}: any) => (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={screenOptions}
+      />
       <Stack.Screen
         name="Rovers"
         component={RoversScreen}
@@ -72,21 +77,7 @@ const Stack = createStackNavigator(),
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
       }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({color, size}: {color: string; size: number}) => (
-            <Icon
-              type="Ionicons"
-              name="home-outline"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
+      <Tab.Screen name="Home" component={RoversStackNavigator} />
       <Tab.Screen
         name="Rovers"
         options={{

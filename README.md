@@ -27,7 +27,7 @@
 
 `Optional:`
 
-- [ ] Allow the user to save search parameters in Local Storage
+- [x] Allow the user to save search parameters in Local Storage
 - [x] A lot of extra points if you include a few tests.
 - [x] We don't care about the UX design, but a nicely styled app would get extra points :D
 
