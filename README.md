@@ -52,7 +52,8 @@ Notes:
 ```
 
 ## Previews Snapshots
-
-<img src="/src/assets/images/Welcome.png" width="100">
-<img src="/src/assets/images/Rovers.png" width="100">
-<img src="/src/assets/images/Cameras.png" width="100">
+<div style="flex-direction: row">
+  <img src="/src/assets/images/Welcome.png" width="200">
+  <img src="/src/assets/images/Rovers.png" width="200">
+  <img src="/src/assets/images/Cameras.png" width="200">
+</div>
