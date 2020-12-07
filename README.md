@@ -16,7 +16,7 @@
 
 #### Using React Native, build an app that:
 
-- [x] Connects to the [NASA API](https://api.nasa.gov/)
+- [x] Connects to the[NASA API](https://api.nasa.gov/){:target="_blank"}
 - [x] Obtains photos from the 'Mars Rover' endpoint
 - [x] Allows the user to see the photos of each rover (Curiosity, Opportunity and Spirit)
 - [x] The photos list should be paginated showing a max of 25 photos per page (dynamic loading similar to facebook/instagram will be nice, not required)
@@ -39,4 +39,18 @@ Notes:
 - [x] Please use a linter!
 - [x] When you finish the test, push it as a public repository in github ~~, gitlab, bitbucket or similar~~ and send us the repository URL.
 
+## Preview
+
+![CupertinoListTile](https://raw.githubusercontent.com/jpnurmi/cupertino_list_tile/master/doc/images/preview.gif "CupertinoListTile")
+
+## Usage
 **_To avoid restricting the number of inquiries, carry them out locally._**
+
+ - Start local server
+```
+  yarn server
+```
+ - Run project
+```
+  yarn ios
+```
