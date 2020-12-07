@@ -57,6 +57,7 @@
     "react-native": "^0.63.3",
     "react-native-calendars": "^1.505.0",
     "react-native-dynamic-vector-icons": "^1.1.4",
+    "react-native-fast-image": "^8.3.4",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-onboarding-swiper": "^1.1.4",
     "react-native-reanimated": "^1.13.2",

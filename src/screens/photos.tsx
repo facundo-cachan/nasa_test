@@ -1,8 +1,10 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, View, Text, Image} from 'react-native';
+import {SafeAreaView, ScrollView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FastImage from 'react-native-fast-image';
 import {Loading, MyCalendar} from '@components';
 import {AppContext} from '@navigation/AppProvider';
+import {width} from '@utils/_dimensions';
 
 import type {Photo, Rover} from '../interfaces';
 
@@ -58,10 +60,15 @@ const PhotosScreen = ({route: {params}}: any) => {
         decelerationRate="fast">
         {data.length >= 1 ? (
           data.map((info: Photo) => (
-            <View key={info.id} style={styles.viewCentered}>
-              <Text>{info.img_src}</Text>
-              <Image style={styles.img} source={{uri: info.img_src}} />
-            </View>
+            <FastImage
+              key={info.id}
+              style={{width, height: width}}
+              source={{
+                uri: info.img_src,
+                priority: FastImage.priority.normal,
+              }}
+              resizeMode={FastImage.resizeMode.contain}
+            />
           ))
         ) : (
           <Loading />
