@@ -53,6 +53,6 @@ Notes:
 
 ## Previews Snapshots
 
-![Welcome](https://github.com/facundo-cachan/nasa_test/tree/master/src/assets/images/Welcome.png)
-![Rovers](https://github.com/facundo-cachan/nasa_test/tree/master/src/assets/images/Rovers.png)
-![Cameras](https://github.com/facundo-cachan/nasa_test/tree/master/src/assets/images/Cameras.png)
+![Welcome](/src/assets/images/Welcome.png)
+![Rovers](/src/assets/images/Rovers.png)
+![Cameras](/src/assets/images/Cameras.png)
