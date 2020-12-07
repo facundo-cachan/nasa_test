@@ -19,7 +19,6 @@ const CamerasScreen = ({route: {params}, navigation}: any) => {
       buttonText: styles.buttonText,
     };
   React.useEffect(() => {
-    console.log('CamerasScreen', params);
     if (params) {
       setData(params.cameras);
       AsyncStorage.setItem(key, JSON.stringify(params.cameras));
@@ -53,7 +52,7 @@ const CamerasScreen = ({route: {params}, navigation}: any) => {
               }}
             />
           ))
-        : data.map(({id, name}: Camera) => (
+        : data.map(({id}: Camera) => (
             <Btn
               key={id}
               label={Capitalize(id)}

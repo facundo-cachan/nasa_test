@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Loading, Btn} from '@components';
 import {AppContext} from '@navigation/AppProvider';
@@ -7,7 +7,6 @@ import {AppContext} from '@navigation/AppProvider';
 import type {Rover} from '../interfaces';
 import Capitalize from '@utils/_capitalize';
 import log from '@utils/_log';
-import {height} from '../utils/_dimensions';
 
 const RoversScreen = ({route: {params}, navigation}: any) => {
   const {styles, url} = React.useContext(AppContext),
