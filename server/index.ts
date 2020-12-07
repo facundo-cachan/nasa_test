@@ -11,10 +11,16 @@ app
   .use(morgan('tiny'))
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({extended: true}))
-  .get('/', (_: any, res: Response) => {
+  .get('/', (_: any, res: Response) => res.status(200).send('Local Server'))
+  .get('/rovers', (_: any, res: Response) => {
     const rovers = require('./data/rovers.json');
     log('ROVERS', rovers);
     res.status(200).json(rovers);
+  })
+  .get('/cameras', (_: any, res: Response) => {
+    const cameras = require('./data/cameras.json');
+    log('CAMERAS', cameras);
+    res.status(200).json(cameras);
   })
   .get('/:rover/photos', (req: Request, res: Response) => {
     log('BODY', req.body);
@@ -25,11 +31,6 @@ app
      */
     //const rovers = require(`./data/${rover}.json`);
     res.status(200); //.json(rovers);
-  })
-  .get('/cameras', (_: any, res: Response) => {
-    const cameras = require('./data/cameras.json');
-    log('CAMERAS', cameras);
-    res.status(200).json(cameras);
   })
   .listen(PORT, () => {
     console.clear();

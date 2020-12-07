@@ -21,15 +21,17 @@ export default {
   headerLogo: {width: 50, height: 50},
   viewCentered: {
     width: width - 10,
-    height: width / 2,
+    height: width / 3,
     margin: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
   img: {
-    width,
-    height: width,
-    resizeMode: 'stretch',
+    flex: 1,
+    width: width / 2,
+    height: width / 2,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
   buttonContainer: {
     flexDirection: 'row',

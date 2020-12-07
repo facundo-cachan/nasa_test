@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const txt = {fontSize: 16, color: '#fff'};
 
@@ -35,6 +36,15 @@ const Done = ({...props}) => (
 
 const HomeScreen = ({navigation}: any) => {
   navigation.setOptions({tabBarVisible: false});
+  React.useEffect(() => {
+    (async () =>
+      ['rovers', 'cameras'].map((k: string) =>
+        fetch(`http://localhost:8000/${k}`)
+          .then((response) => response.json())
+          .then((json) => AsyncStorage.setItem(k, JSON.stringify(json)))
+          .catch((error) => console.error(error)),
+      ))();
+  }, []);
   return (
     <Onboarding
       SkipButtonComponent={Skip}

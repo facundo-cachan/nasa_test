@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View, Text, FlatList, Image} from 'react-native';
+import {SafeAreaView, ScrollView, View, Text, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Loading, MyCalendar} from '@components';
 import {AppContext} from '@navigation/AppProvider';
@@ -14,18 +14,25 @@ const PhotosScreen = ({route: {params}}: any) => {
 
   React.useEffect(() => {
     if (params) {
-      setData(params);
+      console.log('PhotosScreen PARAMS');
+      console.log(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${params.rover}/photos?sol=1000&camera=${params.camera}&api_key=0ZegDETvWCczEnQHgiWdhhlsehO4i32RQq5z09r9`,
+      );
       fetch(
-        `${url}/${params.rover}/photos?&api_key=DEMO_KEY&sol=10&camera=${params.camera}`,
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${params.rover}/photos?sol=1000&camera=${params.camera}&api_key=0ZegDETvWCczEnQHgiWdhhlsehO4i32RQq5z09r9`,
       )
         .then((response) => response.json())
         .then((json) => {
           if (json.photos && json.photos.length >= 1) setData(json.photos);
         })
-        .catch((error) => console.error(error));
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(!loading));
     } else {
+      console.log('PhotosScreen NOT PARAMS');
       AsyncStorage.getItem('rovers').then((rovers) => {
         if (rovers) {
+          console.log(rovers);
+          /*
           JSON.parse(rovers).map(({id}: Rover) =>
             fetch(`${url}/${id}/photos/api_key=DEMO_KEY&earth_date=${day}`)
               .then((response) => response.json())
@@ -35,29 +42,26 @@ const PhotosScreen = ({route: {params}}: any) => {
               })
               .catch((error) => console.error(error)),
           );
+          */
         }
       });
     }
-    setLoading(!loading);
   }, [params]);
   return loading ? (
     <Loading />
   ) : (
     <SafeAreaView style={styles.container} testID="PhotosScreen">
-      <FlatList
-        data={JSON.parse(data).filter(
-          (photo: Photo) => photo.earth_date === day,
-        )}
-        renderItem={({item}: any) => (
-          <View style={styles.viewCentered}>
-            <Image
-              style={styles.img}
-              source={{uri: item.img_src, cache: 'force-cache'}}
-            />
-          </View>
-        )}
-        keyExtractor={(item: any) => item.id.toString()}
-      />
+      <ScrollView
+        style={styles.scrollView}
+        scrollEventThrottle={200}
+        decelerationRate="fast">
+        {data.length >= 1 &&
+          data.map((info: Photo) => (
+            <View key={info.id} style={styles.viewCentered}>
+              <Image style={styles.img} source={{uri: info.img_src}} />
+            </View>
+          ))}
+      </ScrollView>
       <MyCalendar
         onDayPress={(day: any) => {
           setDay(day.dateString);

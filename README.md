@@ -54,3 +54,9 @@ Notes:
 ```
   yarn ios
 ```
+
+## Previews Snapshots
+
+![Welcome](https://github.com/facundo-cachan/nasa_test/tree/master/src/assets/images/Welcome.png)
+![Rovers](https://github.com/facundo-cachan/nasa_test/tree/master/src/assets/images/Rovers.png)
+![Cameras](https://github.com/facundo-cachan/nasa_test/tree/master/src/assets/images/Cameras.png)

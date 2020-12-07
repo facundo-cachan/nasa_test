@@ -3,7 +3,7 @@ import {Alert, Modal, TouchableHighlight} from 'react-native';
 import {CalendarList} from 'react-native-calendars';
 import Icon from 'react-native-dynamic-vector-icons';
 
-import {CopyRight} from '@components';
+import CopyRight from './copyRight';
 import {width} from '@utils/_dimensions';
 
 const styles = {
