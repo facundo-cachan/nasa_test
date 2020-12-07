@@ -39,10 +39,6 @@ Notes:
 - [x] Please use a linter!
 - [x] When you finish the test, push it as a public repository in github ~~, gitlab, bitbucket or similar~~ and send us the repository URL.
 
-## Preview
-
-![CupertinoListTile](https://raw.githubusercontent.com/jpnurmi/cupertino_list_tile/master/doc/images/preview.gif "CupertinoListTile")
-
 ## Usage
 **_To avoid restricting the number of inquiries, carry them out locally._**
 
