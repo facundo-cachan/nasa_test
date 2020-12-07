@@ -53,6 +53,6 @@ Notes:
 
 ## Previews Snapshots
 
-![Welcome](/src/assets/images/Welcome.png {width=100})
-![Rovers](/src/assets/images/Rovers.png {width=100})
-![Cameras](/src/assets/images/Cameras.png {width=100})
+<img src="/src/assets/images/Welcome.png" width="100">
+<img src="/src/assets/images/Rovers.png" width="100">
+<img src="/src/assets/images/Cameras.png" width="100">
