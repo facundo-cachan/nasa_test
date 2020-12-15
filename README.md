@@ -16,7 +16,7 @@
 
 #### Using React Native, build an app that:
 
-- [x] Connects to the[NASA API](https://api.nasa.gov/){:target="_blank" rel="noopener"}
+- [x] Connects to the[NASA API](https://api.nasa.gov/)
 - [x] Obtains photos from the 'Mars Rover' endpoint
 - [x] Allows the user to see the photos of each rover (Curiosity, Opportunity and Spirit)
 - [x] The photos list should be paginated showing a max of 25 photos per page (dynamic loading similar to facebook/instagram will be nice, not required)
