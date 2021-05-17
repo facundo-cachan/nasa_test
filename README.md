@@ -10,6 +10,7 @@
   </a>
 
   <p>Custom on React Native application to consume NASA image api.</p>
+  <h5>Start of the project 29 Nov 2020.</h5>
 </div>
 
 <hr />
@@ -57,3 +58,5 @@ Notes:
   <img src="/src/assets/images/Rovers.png" width="200">
   <img src="/src/assets/images/Cameras.png" width="200">
 </div>
+
+<h5>End of project 15 Dec 2020.</h5>
